@@ -119,15 +119,17 @@ function findById(movies, id) {
  *  //> []
  */
 function filterByGenre(movies, genre) {
-  const result = movies.filter((movie) => movie.genre === genre.toLowerCase());
+  const result = movies.filter((movie) => {
+    return movie.genre.toLowerCase().includes(genre.toLowerCase());
+  });
   //if movies arr is empty, throw error
   if (!movies.length) {
     throw "Sorry! no movies available";
   }
   //if no matching genres return empty arr
-  // if (movie.genre !== genre.toLowerCase()) {
-  //   return [];
-  // }
+  if (!movies === genre) {
+    return [];
+  }
   return result;
 }
 
