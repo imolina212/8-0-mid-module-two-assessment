@@ -58,12 +58,17 @@ function getAllMovieTitles(movies) {
  *  //> false
  */
 function checkIfAnyMovieHasRating(movies, rating = "G") {
-  const hasRating = movies.some((movie) => movie.rating === rating);
-  if (movies.length === 0) {
+  const hasRating = movies.some((movie) => {
+    if (movie.rated === rating) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+  if (!movies.length) {
     throw "Sorry, no movies available";
-  } else {
-    return hasRating;
   }
+  return hasRating;
 }
 
 /**
@@ -120,9 +125,9 @@ function filterByGenre(movies, genre) {
     throw "Sorry! no movies available";
   }
   //if no matching genres return empty arr
-  if (movie.genre !== genre.toLowerCase()) {
-    return [];
-  }
+  // if (movie.genre !== genre.toLowerCase()) {
+  //   return [];
+  // }
   return result;
 }
 
@@ -160,7 +165,6 @@ function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
       return releasedYear;
     }
   });
-
   return result;
 }
 
